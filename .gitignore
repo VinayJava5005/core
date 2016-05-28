@@ -29,3 +29,5 @@ buildNumber.properties
 .project
 *.iml
 .settings
+bin/
+out/
