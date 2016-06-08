@@ -44,7 +44,7 @@ public class Person implements Cloneable {
     }
 
     @Override
-    protected Object clone() {
+    protected Person clone() {
         Person person = null;
         try {
             person = (Person) super.clone();

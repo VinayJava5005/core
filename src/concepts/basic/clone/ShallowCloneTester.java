@@ -8,7 +8,7 @@ public class ShallowCloneTester {
 
     public static void main(String[] args) {
         Person firstPerson = new Person();
-        Person clonePerson = (Person) firstPerson.clone();
+        Person clonePerson = firstPerson.clone();
         clonePerson.setfName("Deepu");
         clonePerson.getQualifications().add(0, "12th-Non medical");
         System.out.println("clonePerson : " + clonePerson);
