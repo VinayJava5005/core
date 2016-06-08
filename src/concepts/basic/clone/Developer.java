@@ -44,7 +44,7 @@ public class Developer {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    protected Developer clone() throws CloneNotSupportedException {
         Developer developer = new Developer();
         developer.setfName(this.fName);
         developer.setlName(this.lName);

@@ -10,7 +10,7 @@ public class DeepCloneTester {
         Developer firstDeveloper = new Developer();
         Developer cloneDeveloper = null;
         try {
-            cloneDeveloper = (Developer) firstDeveloper.clone();
+            cloneDeveloper = firstDeveloper.clone();
             cloneDeveloper.setfName("Deepu");
             cloneDeveloper.getKnownLanguages().add(0, "C");
             System.out.println("cloneDeveloper : " + cloneDeveloper);
