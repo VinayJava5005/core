@@ -8,15 +8,10 @@ public class DeepCloneTester {
 
     public static void main(String[] args) {
         Developer firstDeveloper = new Developer();
-        Developer cloneDeveloper = null;
-        try {
-            cloneDeveloper = firstDeveloper.clone();
-            cloneDeveloper.setfName("Deepu");
-            cloneDeveloper.getKnownLanguages().add(0, "C");
-            System.out.println("cloneDeveloper : " + cloneDeveloper);
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        Developer cloneDeveloper = firstDeveloper.clone();
+        cloneDeveloper.setfName("Deepu");
+        cloneDeveloper.getKnownLanguages().add(0, "C");
+        System.out.println("cloneDeveloper : " + cloneDeveloper);
         System.out.println("firstDeveloper : " + firstDeveloper);
 
         System.out.println(".....................................");

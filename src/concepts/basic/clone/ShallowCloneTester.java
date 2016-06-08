@@ -8,15 +8,11 @@ public class ShallowCloneTester {
 
     public static void main(String[] args) {
         Person firstPerson = new Person();
-        Person clonePerson = null;
-        try {
-            clonePerson = (Person) firstPerson.clone();
-            clonePerson.setfName("Deepu");
-            clonePerson.getQualifications().add(0, "12th-Non medical");
-            System.out.println("clonePerson : " + clonePerson);
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
+        Person clonePerson = (Person) firstPerson.clone();
+        clonePerson.setfName("Deepu");
+        clonePerson.getQualifications().add(0, "12th-Non medical");
+        System.out.println("clonePerson : " + clonePerson);
+
         System.out.println("firstPerson : " + firstPerson);
 
         System.out.println(".....................................");

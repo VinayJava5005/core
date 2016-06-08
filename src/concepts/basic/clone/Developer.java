@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by parya on 6/8/2016.
  */
-public class Developer {
+public class Developer implements Cloneable {
     private String fName;
     private String lName;
 
@@ -44,11 +44,15 @@ public class Developer {
     }
 
     @Override
-    protected Developer clone() throws CloneNotSupportedException {
-        Developer developer = new Developer();
-        developer.setfName(this.fName);
-        developer.setlName(this.lName);
-        developer.setKnownLanguages(new ArrayList<>(this.knownLanguages));
+    protected Developer clone() {
+        Developer developer = null;
+
+        try {
+            developer = (Developer) super.clone();
+            developer.setKnownLanguages(new ArrayList<>(this.knownLanguages));
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
 
         return developer;
     }
