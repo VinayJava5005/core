@@ -17,7 +17,7 @@ public class ResponseDto {
     boolean isValidResponse;
 
     @XmlElement(name = "ErrorMessage")
-    @XmlJavaTypeAdapter(Adapter1.class)
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     List<String> errorMessage;
 
     @XmlElement(name = "ResponseList")
