@@ -16,8 +16,6 @@ import java.io.InputStreamReader;
 public class EchoServer {
     public static void main(String[] args) {
         try {
-//            System.setProperty("javax.net.ssl.keyStore", "mySrvKeystore");
-//            System.setProperty("javax.net.ssl.keyStorePassword", "123456");
             SSLServerSocketFactory sslserversocketfactory =
                     (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
             SSLServerSocket sslserversocket =
