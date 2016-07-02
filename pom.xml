@@ -11,6 +11,8 @@
 
         <!-- Jackson -->
         <jackson-version>2.7.4</jackson-version>
+        <apache-commons-version>3.4</apache-commons-version>
+        <apache-httpclient-version>4.5.2</apache-httpclient-version>
 
     </properties>
 
@@ -41,6 +43,19 @@
             <artifactId>jackson-datatype-jsr310</artifactId>
             <version>${jackson-version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache-commons-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${apache-httpclient-version}</version>
+        </dependency>
+
 
     </dependencies>
 </project>
