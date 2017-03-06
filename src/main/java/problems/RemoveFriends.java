@@ -3,7 +3,7 @@ package problems;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -30,7 +30,7 @@ public class RemoveFriends {
     private static void processInput(Integer K, String[] popularity) {
 
 //        List<Integer> friendsPopularities = Arrays.asList(popularity).stream().mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
-        List<Integer> friendsPopularities = new ArrayList<>();
+        List<Integer> friendsPopularities = new LinkedList<>();
         for (String aPopularity : popularity) {
             friendsPopularities.add(Integer.parseInt(aPopularity));
         }
