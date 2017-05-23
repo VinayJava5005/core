@@ -7,28 +7,30 @@ import java.util.*;
  */
 public class NumberSplitter {
 
+    private static Map<Integer, List<String>> numbersSplittersMap;
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
         int number = scanner.nextInt();
 
-        Map<Integer, List<String>> numberSplittersMap = generateNumbersSplitterMap(number);
+        numbersSplittersMap = generateNumbersSplitterMap(number);
 
-        System.out.println(numberSplittersMap);
+        System.out.println(numbersSplittersMap);
 
         int startIndex = 0;
         boolean isSplitted = true;
-        List<String> splitters = new ArrayList<>();
+        List<String> numberSplitters = new ArrayList<>();
         while (isSplitted) {
-            int length = splitters.size();
-            isSplitted = splitNumbers(number, numberSplittersMap, startIndex, splitters);
+            int length = numberSplitters.size();
+            isSplitted = splitNumber(number, startIndex, numberSplitters);
 
             if (isSplitted) {
                 startIndex = length;
             }
         }
-        Set<String> result = new HashSet<>(splitters);
+        Set<String> result = new HashSet<>(numberSplitters);
         System.out.println(result);
 
         verifyOutput(result);
@@ -45,6 +47,8 @@ public class NumberSplitter {
     }
 
     private static void verifyOutput(Set<String> output) {
+
+        System.out.println("Verifying output : ");
         for (String element : output) {
             String[] values = element.split(",");
 
@@ -57,48 +61,50 @@ public class NumberSplitter {
         }
     }
 
-    private static boolean splitNumbers(int number, Map<Integer, List<String>> numberSplittersMap, int startIndex, List<String> splitters) {
-        boolean result = false;
-        List<String> newList = new ArrayList<>();
+    private static boolean splitNumber(int number, int startIndex, List<String> splitters) {
+        boolean isSplitted = false;
+        List<String> subSplitters = new ArrayList<>();
         if (splitters.size() > 0) {
 
-            for (int index = startIndex; index < splitters.size(); index++) {
-                String[] splitStr = splitters.get(index).split(",");
+            splitters.stream().skip(startIndex).forEach(element -> {
+                String[] numbers = element.split(",");
 
-                for (int splitIndex = 0; splitIndex < splitStr.length; splitIndex++) {
+                for (int splitIndex = 0; splitIndex < numbers.length; splitIndex++) {
 
-                    List<String> split = numberSplittersMap.get(Integer.parseInt(splitStr[splitIndex]));
+                    List<String> numberSplitters = numbersSplittersMap.get(Integer.parseInt(numbers[splitIndex]));
 
-                    if (split != null) {
-                        for (int indexj = 0; indexj < split.size(); indexj++) {
-                            String joindString = joinSplitter(splitIndex, splitters.get(index), split.get(indexj));
-                            newList.add(joindString);
+                    if (numberSplitters != null) {
+                        for (String numberSplit : numberSplitters) {
+                            String joinedString = joinSplitter(splitIndex, element, numberSplit);
+                            subSplitters.add(joinedString);
                         }
                     }
                 }
-            }
+
+            });
 
         } else {
-            splitters.addAll(numberSplittersMap.get(number));
-            result = true;
+            splitters.addAll(numbersSplittersMap.get(number));
+            isSplitted = true;
         }
 
-        if (newList.size() > 0) {
-            splitters.addAll(newList);
-            result = true;
+        if (subSplitters.size() > 0) {
+            splitters.addAll(subSplitters);
+            isSplitted = true;
         }
 
-        return result;
+        return isSplitted;
     }
 
-    private static String joinSplitter(int splitIndex, String s, String s2) {
+    private static String joinSplitter(int splitIndex, String element, String subSplit) {
         String joinedString = "";
-        String[] s1 = s.split(",");
-        for (int index = 0; index < s1.length; index++) {
+        String[] numbers = element.split(",");
+
+        for (int index = 0; index < numbers.length; index++) {
             if (index == splitIndex) {
-                joinedString = joinedString + s2 + ",";
+                joinedString = joinedString + subSplit + ",";
             } else {
-                joinedString = joinedString + s1[index] + ",";
+                joinedString = joinedString + numbers[index] + ",";
             }
         }
 
