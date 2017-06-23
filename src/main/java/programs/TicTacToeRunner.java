@@ -9,7 +9,7 @@ public class TicTacToeRunner {
 
     public static void main(String[] args) {
 
-        TicTacToe ticTacToe = new TicTacToe(3);
+        TicTacToe ticTacToe = new TicTacToe(3, false);
         System.out.println(ticTacToe.start().result());
 
     }
@@ -22,11 +22,13 @@ class TicTacToe {
     private String gameResult;
     private Scanner scanner;
     private Map<Integer, List<String>> winnerCheck;
-    private int moveLocation;
-    private String currentMove;
+    private int currentMoveLocation;
+    private String currentPlayer;
+    private boolean singlePlayer;
 
-    public TicTacToe(int type) {
+    public TicTacToe(int type, boolean singlePlayer) {
         this.type = type;
+        this.singlePlayer = singlePlayer;
         this.board = new HashMap<>();
 
         for (int keyIndex = 1; keyIndex <= (type * type); keyIndex++) {
@@ -45,7 +47,7 @@ class TicTacToe {
         this.winnerCheck.put(8, Arrays.asList("7,8,9", "2,5,8"));
         this.winnerCheck.put(9, Arrays.asList("1,5,9", "3,6,9"));
 
-        this.moveLocation = 0;
+        this.currentMoveLocation = 0;
     }
 
     public TicTacToe display() {
@@ -82,13 +84,22 @@ class TicTacToe {
 
         display();
         do {
-            System.out.println("Yours");
+            System.out.println("Player 1");
+            currentPlayer = "X";
             userMove();
 
             display();
             if (!isGameOver()) {
-                System.out.println("Computers");
-                computerMove();
+
+                if (isSinglePlayer()) {
+                    System.out.println("Computers");
+                    currentPlayer = "0";
+                    computerMove();
+                } else {
+                    System.out.println("Player 2");
+                    currentPlayer = "0";
+                    userMove();
+                }
             }
             display();
         } while (!isGameOver());
@@ -101,23 +112,21 @@ class TicTacToe {
     }
 
     private void userMove() {
-
-        moveLocation = scanner.nextInt();
-        currentMove = "X";
-        board.put(moveLocation, currentMove);
+1        currentMoveLocation = scanner.nextInt();
+        board.put(currentMoveLocation, currentPlayer);
     }
 
     private boolean isGameOver() {
 
         boolean isGameOver = false;
-        if (moveLocation != 0) {
+        if (currentMoveLocation != 0) {
 
-            for (String locationCombination : winnerCheck.get(moveLocation)) {
+            for (String locationCombination : winnerCheck.get(currentMoveLocation)) {
                 String[] locations = locationCombination.split(",");
 
                 boolean result = true;
                 for (String location : locations) {
-                    if (!currentMove.equals(board.get(Integer.parseInt(location)))) {
+                    if (!currentPlayer.equals(board.get(Integer.parseInt(location)))) {
                         result = false;
                         break;
                     }
@@ -125,7 +134,7 @@ class TicTacToe {
 
                 if (result) {
                     isGameOver = result;
-                    gameResult = "Player " + currentMove + " won";
+                    gameResult = "Player " + currentPlayer + " won";
                     break;
                 }
 
@@ -137,5 +146,13 @@ class TicTacToe {
 
     public String result() {
         return gameResult;
+    }
+
+    public boolean isSinglePlayer() {
+        return singlePlayer;
+    }
+
+    public void setSinglePlayer(boolean singlePlayer) {
+        this.singlePlayer = singlePlayer;
     }
 }
