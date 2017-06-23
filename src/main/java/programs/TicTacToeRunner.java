@@ -112,7 +112,7 @@ class TicTacToe {
     }
 
     private void userMove() {
-1        currentMoveLocation = scanner.nextInt();
+        currentMoveLocation = scanner.nextInt();
         board.put(currentMoveLocation, currentPlayer);
     }
 
