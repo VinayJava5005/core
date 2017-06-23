@@ -9,7 +9,7 @@ public class TicTacToeRunner {
 
     public static void main(String[] args) {
 
-        TicTacToe ticTacToe = new TicTacToe(3, false);
+        TicTacToe ticTacToe = new TicTacToe(3, true);
         System.out.println(ticTacToe.start().result());
 
     }
@@ -25,10 +25,12 @@ class TicTacToe {
     private int currentMoveLocation;
     private String currentPlayer;
     private boolean singlePlayer;
+    private Random random;
 
     public TicTacToe(int type, boolean singlePlayer) {
         this.type = type;
         this.singlePlayer = singlePlayer;
+        this.random = new Random();
         this.board = new HashMap<>();
 
         for (int keyIndex = 1; keyIndex <= (type * type); keyIndex++) {
@@ -109,6 +111,15 @@ class TicTacToe {
 
     private void computerMove() {
 
+        int max = type * type;
+        int min = 1;
+        int number = random.nextInt(max - min + 1) + min;
+
+        while (board.get(number) == "X" || board.get(number) == "0") {
+            number = random.nextInt(max - min + 1) + min;
+        }
+        currentMoveLocation = number;
+        board.put(number, currentPlayer);
     }
 
     private void userMove() {
@@ -152,7 +163,4 @@ class TicTacToe {
         return singlePlayer;
     }
 
-    public void setSinglePlayer(boolean singlePlayer) {
-        this.singlePlayer = singlePlayer;
-    }
 }
