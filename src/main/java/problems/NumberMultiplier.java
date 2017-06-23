@@ -1,6 +1,7 @@
 package problems;
 
 import java.util.Scanner;
+import java.lang.Math;
 
 /**
  * Created by pradeep on 25/5/17.
