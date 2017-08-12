@@ -1,25 +1,44 @@
 package concepts.basic.serialization;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * Created by parya on 5/21/2016.
  */
 
+class Reference {
+    private String data;
+
+    public Reference(String data) {
+        this.data = data;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+}
+
 class Credential implements Serializable {
 
     public static String CLASS_NAME;
+//    private Reference reference;
 
     public Credential() {
         System.out.println("Default Credential");
-        CLASS_NAME= "Credential";
+        CLASS_NAME = "Credential";
     }
 
     public Credential(String userName, String password) {
         System.out.println("Credential");
-        CLASS_NAME= "Credential";
+        CLASS_NAME = "Credential";
         this.userName = userName;
         this.password = password;
+//        this.reference = new Reference(this.userName);
     }
 
     String userName;
@@ -27,7 +46,7 @@ class Credential implements Serializable {
 
     @Override
     public String toString() {
-        return "Username : " + userName + ", Password : " + password;
+        return "Username : " + userName + ", Password : " + password + " reference data : " /*+ this.reference.getData()*/;
     }
 
 }
