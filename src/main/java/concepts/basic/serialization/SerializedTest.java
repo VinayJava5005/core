@@ -8,14 +8,16 @@ import java.io.*;
 
 class Credential implements Serializable {
 
-    public static String CLASS_NAME = "Credential";
+    public static String CLASS_NAME;
 
     public Credential() {
         System.out.println("Default Credential");
+        CLASS_NAME= "Credential";
     }
 
     public Credential(String userName, String password) {
         System.out.println("Credential");
+        CLASS_NAME= "Credential";
         this.userName = userName;
         this.password = password;
     }
